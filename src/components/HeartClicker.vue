@@ -37,7 +37,7 @@ export default {
       this.isClicked = !this.isClicked;
       const action = this.isClicked ? 'increment' : 'decrement';
       try {
-        const response = await axios.post(`https://www.krapikas.lt/api/clicks${action}`);
+        const response = await axios.post(`https://www.krapikas.lt/api/clicks/${action}`);
         this.clickedCount = response.data.count;
       } catch (error) {
         console.error("Failed to update click count:", error);
