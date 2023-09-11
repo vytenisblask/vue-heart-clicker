@@ -112,9 +112,9 @@ export default {
   font-family: 'Montserrat', sans-serif;
   font-family: 'Roboto', sans-serif;
   position: absolute;
-  bottom: 1.5rem;
+  bottom: 1.6rem;
   right: 1rem;
-  font-size: 18px;
+  font-size: 20px;
   color: rgb(18, 16, 16);
 }
 </style>
