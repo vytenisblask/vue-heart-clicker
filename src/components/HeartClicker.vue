@@ -26,7 +26,7 @@ export default {
     this.isClicked = localStorage.getItem('isClicked') === 'true';
     
     try {
-      const response = await axios.get('http://194.135.87.123/api/clicks');
+      const response = await axios.get('https://194.135.87.123/api/clicks');
       this.clickedCount = response.data.count;
     } catch (error) {
       console.error("Failed to fetch click count:", error);
@@ -37,7 +37,7 @@ export default {
       this.isClicked = !this.isClicked;
       const action = this.isClicked ? 'increment' : 'decrement';
       try {
-        const response = await axios.post(`http://194.135.87.123/api/clicks${action}`);
+        const response = await axios.post(`https://194.135.87.123/api/clicks${action}`);
         this.clickedCount = response.data.count;
       } catch (error) {
         console.error("Failed to update click count:", error);
