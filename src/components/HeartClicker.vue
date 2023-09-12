@@ -11,8 +11,13 @@
 </template>
 
 <script>
-import axios from 'axios';
+import { createClient } from '@supabase/supabase-js';
 import ToggleFavorite from './ToggleFavorite.vue';
+
+// Initialize Supabase client
+const supabaseUrl = 'https://hiylrjnimvzspaxlltza.supabase.co';
+const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhpeWxyam5pbXZ6c3BheGxsdHphIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTQ1MzA0ODMsImV4cCI6MjAxMDEwNjQ4M30.AoTMzD82fTAVXcsrxdJudCQLCrrBgOxXq1bcNP-W4ss';
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export default {
   components: {
@@ -25,32 +30,52 @@ export default {
     };
   },
   async created() {
-    // Fetch the clicked state from localStorage
-    this.isClicked = localStorage.getItem('isClicked') === 'true';
-    
-    try {
-      const response = await axios.get('https://www.krapikas.lt/api/clicks');
-      this.clickedCount = response.data.count;
-    } catch (error) {
-      console.error("Failed to fetch click count:", error);
+  this.isClicked = localStorage.getItem('isClicked') === 'true';
+  
+  try {
+    const { data, error } = await supabase.from('clicks').select('*').eq('id', 1); // Using .eq('id', 1) to fetch the specific row by ID
+    if (error) throw error;
+    if (data && data.length > 0) {
+        this.clickedCount = data[0].count;
     }
-  },
-  methods: {
-    async toggleHeart() {
+  } catch (error) {
+    console.error("Failed to fetch click count:", error);
+  }
+},
+
+methods: {
+      async toggleHeart() {
       this.isClicked = !this.isClicked;
-      const action = this.isClicked ? 'increment' : 'decrement';
+      
       try {
-        const response = await axios.post(`https://www.krapikas.lt/api/clicks/${action}`);
-        this.clickedCount = response.data.count;
+        const newCount = this.isClicked ? this.clickedCount + 1 : this.clickedCount - 1;
+        await supabase.from('clicks').update({ count: newCount }).eq('id', 1);  // Using .eq('id', 1) to target the specific row
+        
+        const { data, error } = await supabase.from('clicks').select('*').eq('id', 1);  // Using .eq('id', 1) to fetch the specific row
+        if (error) throw error;
+        if (data && data.length > 0) {
+            this.clickedCount = data[0].count;
+        }
       } catch (error) {
         console.error("Failed to update click count:", error);
       }
+
       // Save the state to localStorage
       localStorage.setItem('isClicked', this.isClicked);
     }
   }
 }
 </script>
+
+Here's what's changed:
+
+    During the fetch, we also get the id column and store it as this.rowId.
+    During the update, we provide the WHERE clause by chaining .eq('id', this.rowId) before the .update() call. This tells Supabase which row to update.
+
+Please test this and see if it resolves the issues.
+
+
+
 
 <style scoped>
 .container {

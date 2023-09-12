@@ -3,15 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "vue:serve": "vue-cli-service serve",
+    "vue:build": "vue-cli-service build",
+    "vue:lint": "vue-cli-service lint",
+    "dev": "next dev",
+    "build": "npm run vue:build && next build",
+    "start": "next start"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.33.2",
+    "@vercel/edge-config": "^0.3.0",
     "axios": "^1.5.0",
     "core-js": "^3.8.3",
     "cors": "^2.8.5",
     "express": "^4.18.2",
+    "next": "^13.4.19",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "sass": "^1.66.1",
     "sass-loader": "^13.3.2",
     "sqlite3": "^5.1.6",
