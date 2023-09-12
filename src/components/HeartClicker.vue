@@ -4,9 +4,9 @@
       @clicked="toggleHeart" 
       :favorited="isClicked"
     />
-    <div class="heart-counter" v-if="isClicked">
+    <!-- <div class="heart-counter" v-if="isClicked">
       + {{ clickedCount }}
-    </div>
+    </div> -->
   </div>
 </template>
 
