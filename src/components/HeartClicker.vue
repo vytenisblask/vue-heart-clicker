@@ -15,9 +15,13 @@ import { createClient } from '@supabase/supabase-js';
 import ToggleFavorite from './ToggleFavorite.vue';
 
 // Initialize Supabase client
-const supabaseUrl = process.env.VUE_APP_SUPABASE_URL;
-const supabaseAnonKey = process.env.VUE_APP_SUPABASE_ANON_KEY;
+// const supabaseUrl = process.env.VUE_APP_SUPABASE_URL;
+// const supabaseAnonKey = process.env.VUE_APP_SUPABASE_ANON_KEY;
+const supabaseUrl = 'https://hiylrjnimvzspaxlltza.supabase.co';
+const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhpeWxyam5pbXZ6c3BheGxsdHphIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTQ1MzA0ODMsImV4cCI6MjAxMDEwNjQ4M30.AoTMzD82fTAVXcsrxdJudCQLCrrBgOxXq1bcNP-W4ss';
+
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
 
 export default {
   components: {
