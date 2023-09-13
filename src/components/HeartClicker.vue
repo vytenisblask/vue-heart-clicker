@@ -35,9 +35,10 @@ export default {
   },
   async created() {
   this.isClicked = localStorage.getItem('isClicked') === 'true';
-  
+  console.log("Initial isClicked from localStorage:", this.isClicked);
   try {
     const { data, error } = await supabase.from('clicks').select('*').eq('id', 1); // Using .eq('id', 1) to fetch the specific row by ID
+    console.log("isClicked after fetching from Supabase:", this.isClicked);
     if (error) throw error;
     if (data && data.length > 0) {
         this.clickedCount = data[0].count;
@@ -50,7 +51,7 @@ export default {
 methods: {
       async toggleHeart() {
       this.isClicked = !this.isClicked;
-      
+      console.log("Previous isClicked:", this.isClicked, "New isClicked:", !this.isClicked);
       try {
         const newCount = this.isClicked ? this.clickedCount + 1 : this.clickedCount - 1;
         await supabase.from('clicks').update({ count: newCount }).eq('id', 1);  // Using .eq('id', 1) to target the specific row
@@ -70,16 +71,6 @@ methods: {
   }
 }
 </script>
-
-Here's what's changed:
-
-    During the fetch, we also get the id column and store it as this.rowId.
-    During the update, we provide the WHERE clause by chaining .eq('id', this.rowId) before the .update() call. This tells Supabase which row to update.
-
-Please test this and see if it resolves the issues.
-
-
-
 
 <style scoped>
 .container {
