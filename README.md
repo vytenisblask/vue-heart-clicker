@@ -8,7 +8,7 @@ You can check out [the live version here](https://krapikas.lt)
 - Vue.js: A progressive framework for building user interfaces.
 - Supabase: An open-source Firebase alternative. In this project, it's used for storing and retrieving the number of heart clicks.
 - Sass: A scripting language that is interpreted or compiled into Cascading Style Sheets (CSS).
-    Vercel: For deployment and hosting of the application.
+- Vercel: For deployment and hosting of the application.
 
 ## Features
 
