@@ -37,7 +37,7 @@ export default {
   this.isClicked = localStorage.getItem('isClicked') === 'true';
   console.log("Initial isClicked from localStorage:", this.isClicked);
   try {
-    const { data, error } = await supabase.from('clicks').select('*').eq('id', 1); // Using .eq('id', 1) to fetch the specific row by ID
+    const { data, error } = await supabase.from('clicks').select('*').eq('id', 1); 
     console.log("isClicked after fetching from Supabase:", this.isClicked);
     if (error) throw error;
     if (data && data.length > 0) {
@@ -54,9 +54,9 @@ methods: {
       console.log("Previous isClicked:", this.isClicked, "New isClicked:", !this.isClicked);
       try {
         const newCount = this.isClicked ? this.clickedCount + 1 : this.clickedCount - 1;
-        await supabase.from('clicks').update({ count: newCount }).eq('id', 1);  // Using .eq('id', 1) to target the specific row
+        await supabase.from('clicks').update({ count: newCount }).eq('id', 1); 
         
-        const { data, error } = await supabase.from('clicks').select('*').eq('id', 1);  // Using .eq('id', 1) to fetch the specific row
+        const { data, error } = await supabase.from('clicks').select('*').eq('id', 1); 
         if (error) throw error;
         if (data && data.length > 0) {
             this.clickedCount = data[0].count;
@@ -65,7 +65,6 @@ methods: {
         console.error("Failed to update click count:", error);
       }
 
-      // Save the state to localStorage
       localStorage.setItem('isClicked', this.isClicked);
     }
   }

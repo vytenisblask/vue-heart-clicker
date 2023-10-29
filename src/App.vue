@@ -15,15 +15,13 @@ export default {
 </script>
 
 <style>
-/* Resetting default margin and padding */
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow: hidden; /* This will prevent scrolling */
+  overflow: hidden;
 }
 
-/* Ensuring root app div takes full height */
 #app {
   height: 100%;
 }
